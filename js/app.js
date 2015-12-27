@@ -1,8 +1,15 @@
-var Enemy = function(x,y) {
-    this.x = 0;
-    this.y = 0;
-    this.speed = 100;
+//Make random number
+function randomInt (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// pos 00, speed 100
+var Enemy = function(x,y,speed) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
+    console.log(speed);
 };
 
 // Update the enemy's position, required method for game
@@ -19,7 +26,6 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-
 // Reset enemy location at endpoint
 Enemy.prototype.reset = function() {
    if (this.x >= 500) {
@@ -30,13 +36,10 @@ Enemy.prototype.reset = function() {
 // Now write your own player class
 // requires an update(), render() and a handleInput() method.
 
-var Player = function(){
- this.x = 200;
- this.y = 300;
- this.sprite = '../images/char-boy.png'; 
- //this.update = function(){};
- //this.render = function(){};
-// this.handleInput = function(dt){};
+var Player = function(x,y){
+ this.x = x;
+ this.y = y;
+ this.sprite = 'images/char-boy.png'; 
 };
 
 Player.prototype.update = function(dt) {
@@ -45,11 +48,10 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.render = function(){
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  console.log('meep');
 };
 
-
-Player.handleInput = function(direction){
-
+Player.prototype.handleInput = function(direction){
   if(direction === 'left'){
  this.x -= 100;
  }
@@ -70,11 +72,10 @@ Player.prototype.reset = function () {
 };
 
 // Now instantiate your objects.
-var enemy1 = new Enemy(-101, 55, randomInt(250, 450),'images/mutant-enemy-bug.png');
-var enemy2 = new Enemy(-101, 140, randomInt(250, 450), 'images/enemy-bug.png');
-var enemy3 = new Enemy(-101, 225, randomInt(250, 450), 'images/mutant-enemy-bug.png');
+var enemy1 = new Enemy(-101, 55, randomInt(150, 450),'images/mutant-enemy-bug.png');
+var enemy2 = new Enemy(-101, 140, randomInt(50, 450), 'images/enemy-bug.png');
+var enemy3 = new Enemy(-101, 225, randomInt(75, 450), 'images/mutant-enemy-bug.png');
 
-// Place all enemy objects in an array called allEnemies
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 allEnemies.push(enemy1);
@@ -85,12 +86,6 @@ allEnemies.push(enemy3);
 var player = new Player(202, 390);
 var allPlayers = [];
 allPlayers.push(player);
-
-//Make random number
-function randomInt (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
