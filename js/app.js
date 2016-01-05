@@ -43,33 +43,47 @@ var Player = function(x,y){
 };
 
 Player.prototype.update = function(dt) {
-    this.y += this.speed * dt;
+    //this.y += this.speed * dt;
 };
+
 
 Player.prototype.render = function(){
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  console.log('meep');
 };
 
 Player.prototype.handleInput = function(direction){
-  if(direction === 'left'){
- this.x -= 100;
- }
- if(direction === 'up'){
- this.y -= 82.5;
- }
- if(direction === 'right'){
- this.x += 100;
- }
- if(direction === 'down'){
- this.y += 82.5;
- }
+  if (direction == 'up') {
+        this.y = this.y - 80;
+    } else if (direction == 'down') {
+        this.y = this.y + 80;
+    } else if (direction == 'left') {
+        this.x = this.x - 101;
+    } else if (direction == 'right') {
+        this.x = this.x + 101;
+    }
+// keep player on canvas 
+    if (this.x < 0) {
+        this.x = 0;
+
+    } else if (this.x > 400) {
+        this.x = 400;
+
+    }
+    if (this.y < 0) {
+        this.y = 0;
+
+    } else if (this.y > 400) {
+        this.y = 400;
+
+    }
+
  };
 
 Player.prototype.reset = function () {
     this.x = 202;
     this.y = 390;
 };
+
 
 // Now instantiate your objects.
 var enemy1 = new Enemy(-101, 55, randomInt(150, 450),'images/mutant-enemy-bug.png');
@@ -87,6 +101,19 @@ var player = new Player(202, 390);
 var allPlayers = [];
 allPlayers.push(player);
 
+// check if enemy collided with player
+function checkCollisions(){
+    for (var i = 0; i < allEnemies.length; i++) {
+        if ((allEnemies[i].x) <= player.x + 30 &&
+            (allEnemies[i].x + 30) >= (player.x) &&
+            (allEnemies[i].y)<= player.y + 30 &&
+            (allEnemies[i].y + 30) >= (player.y)) {
+          alert('YOU LOSE');
+        }
+    }
+}
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -99,3 +126,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
