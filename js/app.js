@@ -43,8 +43,9 @@ Enemy.prototype.checkCollisions= function(){
             (allEnemies[i].y)<= player.y + 30 &&
             (allEnemies[i].y + 30) >= (player.y)) {
           alert('YOU LOSE');
+       // player.reset();
         }
-    }
+      }
 };
 
 // Now write your own player class
@@ -56,8 +57,10 @@ var Player = function(x,y){
  this.sprite = 'images/char-boy.png'; 
 };
 
+
+//should I have something inside of update? 
 Player.prototype.update = function(dt) {
-    //this.y += this.speed * dt;
+
 };
 
 
@@ -75,8 +78,8 @@ Player.prototype.handleInput = function(direction){
     } else if (direction == 'right') {
         this.x = this.x + 101;
     }
-    this.reset();
 // keep player on canvas 
+// x is left/right coordinate
     if (this.x < 0) {
         this.x = 0;
 
@@ -84,13 +87,19 @@ Player.prototype.handleInput = function(direction){
         this.x = 400;
 
     }
+// y is up/down coordinate
     if (this.y < 0) {
         this.y = 0;
+     //reset the player at the water
+        this.reset();
+
 
     } else if (this.y > 400) {
         this.y = 400;
+        this.reset();
 
     }
+    
  };
 
 Player.prototype.reset = function () {
@@ -112,8 +121,6 @@ allEnemies.push(enemy3);
 
 // Place the player object in a variable called player
 var player = new Player(202, 390);
-//var allPlayers = [];
-//allPlayers.push(player);
 
 
 // This listens for key presses and sends the keys to your
