@@ -19,6 +19,7 @@ Enemy.prototype.update = function(dt) {
     // runs at the same speed for all computers.
     this.x += (Math.random()*60*dt);
     this.reset();
+    this.checkCollisions();
 };
 
 // Draws the enemy on the screen
@@ -33,6 +34,19 @@ Enemy.prototype.reset = function() {
         this.speed = randomInt(250, 450);
     }
 };
+
+// check if enemy collided with player
+Enemy.prototype.checkCollisions= function(){
+    for (var i = 0; i < allEnemies.length; i++) {
+        if ((allEnemies[i].x) <= player.x + 30 &&
+            (allEnemies[i].x + 30) >= (player.x) &&
+            (allEnemies[i].y)<= player.y + 30 &&
+            (allEnemies[i].y + 30) >= (player.y)) {
+          alert('YOU LOSE');
+        }
+    }
+};
+
 // Now write your own player class
 // requires an update(), render() and a handleInput() method.
 
@@ -100,18 +114,6 @@ allEnemies.push(enemy3);
 var player = new Player(202, 390);
 var allPlayers = [];
 allPlayers.push(player);
-
-// check if enemy collided with player
-function checkCollisions(){
-    for (var i = 0; i < allEnemies.length; i++) {
-        if ((allEnemies[i].x) <= player.x + 30 &&
-            (allEnemies[i].x + 30) >= (player.x) &&
-            (allEnemies[i].y)<= player.y + 30 &&
-            (allEnemies[i].y + 30) >= (player.y)) {
-          alert('YOU LOSE');
-        }
-    }
-}
 
 
 // This listens for key presses and sends the keys to your
