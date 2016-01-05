@@ -75,6 +75,7 @@ Player.prototype.handleInput = function(direction){
     } else if (direction == 'right') {
         this.x = this.x + 101;
     }
+    this.reset();
 // keep player on canvas 
     if (this.x < 0) {
         this.x = 0;
@@ -90,7 +91,6 @@ Player.prototype.handleInput = function(direction){
         this.y = 400;
 
     }
-
  };
 
 Player.prototype.reset = function () {
@@ -112,8 +112,8 @@ allEnemies.push(enemy3);
 
 // Place the player object in a variable called player
 var player = new Player(202, 390);
-var allPlayers = [];
-allPlayers.push(player);
+//var allPlayers = [];
+//allPlayers.push(player);
 
 
 // This listens for key presses and sends the keys to your
