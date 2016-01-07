@@ -1,13 +1,16 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+To run the game:
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+  Create a local server using Python. Note: You must have Python installed.
+    1.  Download this project. 
+    2.  Open terminal. Change Directory to the location of this project. 
+    3.  Use this command: python -m SimpleHTTPServer.
+    4.  Once the server has started, navigate to this address in your browser : http://0.0.0.0:8000/index.html
+    5.  Play and have fun! 
 
-run game:
-use your arrow keys to maneuver the game board. 
-
-play game:
-don't hit the bugs, because game over!
-player resets once he reaches the water. 
+  To play game:
+    1. Use your arrow keys to maneuver the game board. 
+    2. Don't hit the bugs, because the game will be over!
+    3. The player wins once he reaches the water and the game automatically resets.
