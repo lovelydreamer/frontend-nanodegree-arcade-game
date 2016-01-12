@@ -1,10 +1,10 @@
 //Make random number
-function randomInt (min, max) {
+function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // pos 00, speed 100
-var Enemy = function(x,y,speed) {
+var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -17,7 +17,7 @@ var Enemy = function(x,y,speed) {
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter which will ensure the game 
     // runs at the same speed for all computers.
-    this.x += (Math.random()*60*dt);
+    this.x += (Math.random() * 60 * dt);
     this.reset();
     this.checkCollisions();
 };
@@ -29,47 +29,48 @@ Enemy.prototype.render = function() {
 
 // Reset enemy location at endpoint
 Enemy.prototype.reset = function() {
-   if (this.x >= 500) {
+    if (this.x >= 500) {
         this.x = -101;
         this.speed = randomInt(250, 450);
     }
 };
 
 // check if enemy collided with player
-Enemy.prototype.checkCollisions= function(){
+Enemy.prototype.checkCollisions = function() {
     for (var i = 0; i < allEnemies.length; i++) {
         if ((allEnemies[i].x) <= player.x + 30 &&
             (allEnemies[i].x + 30) >= (player.x) &&
-            (allEnemies[i].y)<= player.y + 30 &&
+            (allEnemies[i].y) <= player.y + 30 &&
             (allEnemies[i].y + 30) >= (player.y)) {
-          alert('YOU LOSE');
-       // player.reset();
+
+          // reset player to start position if collide with enemy   
+            player.reset();
+            alert('YOU LOSE');
         }
-      }
+    }
 };
 
 // Now write your own player class
 // requires an update(), render() and a handleInput() method.
 
-var Player = function(x,y){
- this.x = x;
- this.y = y;
- this.sprite = 'images/char-boy.png'; 
+var Player = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/char-boy.png';
 };
 
 
-//should I have something inside of update? 
 Player.prototype.update = function(dt) {
 
 };
 
 
-Player.prototype.render = function(){
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function(direction){
-  if (direction == 'up') {
+Player.prototype.handleInput = function(direction) {
+    if (direction == 'up') {
         this.y = this.y - 80;
     } else if (direction == 'down') {
         this.y = this.y + 80;
@@ -78,8 +79,8 @@ Player.prototype.handleInput = function(direction){
     } else if (direction == 'right') {
         this.x = this.x + 101;
     }
-// keep player on canvas 
-// x is left/right coordinate
+    // keep player on canvas 
+    // x is left/right coordinate
     if (this.x < 0) {
         this.x = 0;
 
@@ -87,10 +88,10 @@ Player.prototype.handleInput = function(direction){
         this.x = 400;
 
     }
-// y is up/down coordinate
+    // y is up/down coordinate
     if (this.y < 0) {
-        this.y = 0;
-     //reset the player at the water
+   
+        //reset the player at the water
         this.reset();
 
 
@@ -99,17 +100,17 @@ Player.prototype.handleInput = function(direction){
         this.reset();
 
     }
-    
- };
 
-Player.prototype.reset = function () {
+};
+
+Player.prototype.reset = function() {
     this.x = 202;
     this.y = 390;
 };
 
 
 // Now instantiate your objects.
-var enemy1 = new Enemy(-101, 55, randomInt(150, 450),'images/mutant-enemy-bug.png');
+var enemy1 = new Enemy(-101, 55, randomInt(150, 450), 'images/mutant-enemy-bug.png');
 var enemy2 = new Enemy(-101, 140, randomInt(50, 450), 'images/enemy-bug.png');
 var enemy3 = new Enemy(-101, 225, randomInt(75, 450), 'images/mutant-enemy-bug.png');
 
@@ -135,4 +136,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
